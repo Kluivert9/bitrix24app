@@ -6,7 +6,8 @@ export const initialState = {
     name: '',
     data: {}
   },
-  currentPage: descriptionOfPages.MAIN_PAGE.name
+  currentPage: descriptionOfPages.MAIN_PAGE.name,
+  loaderCount: 0
 }
 
 export function appReducer(state = initialState, { type, payload }) {
@@ -23,6 +24,11 @@ export function appReducer(state = initialState, { type, payload }) {
       return  {
         ...state,
         currentPage: payload.page
+      }
+    case types.SET_LOADER_COUNT:
+      return {
+        ...state,
+        loaderCount: payload.count
       }
     default:
       return state

@@ -2,13 +2,14 @@ import React, { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import ApiClient from '../../api/ApiClient'
-import { getCurrentUser, getCurrentPage } from '../../store/reducers/app/selectors'
+import { getCurrentUser, getCurrentPage, getVisibleLoaderFlag } from '../../store/reducers/app/selectors'
 import { fetchCurrentUser, setCurrentPage } from '../../store/reducers/app/actions'
 import MainPage from '../pages/MainPage'
 import CurrentRequestPage from '../pages/CurrentRequestPage'
 import NewRequestPage from '../pages/NewRequestPage'
 import SettingsPage from '../pages/SettingsPage'
 import TaskListPage from '../pages/TaskListPage'
+import Loader from '../../components/Loader'
 import { descriptionOfPages } from '../../common/descriptionOfPages'
 
 import './app.css'
@@ -24,6 +25,7 @@ const pages = {
 export default function App() {
   const { name } = useSelector(getCurrentUser)
   const currentPage = useSelector(getCurrentPage)
+  const showLoader = useSelector(getVisibleLoaderFlag)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -62,6 +64,7 @@ export default function App() {
         })}
       </ul>
       <CurrentPageComponent />
+      {showLoader && <Loader />}
     </div>
   )
 }
