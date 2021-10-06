@@ -3,7 +3,8 @@ import UsersApi from '../../../api/UsersApi'
 export const types = {
   SET_CURRENT_USER_PROPS: 'app/SET_CURRENT_USER_PROPS',
   SET_CURRENT_PAGE: 'app/SET_CURRENT_PAGE',
-  SET_LOADER_COUNT: 'app/SET_LOADER_COUNT'
+  SET_LOADER_COUNT: 'app/SET_LOADER_COUNT',
+  SHOW_NOTIFICATION: 'app/SHOW_NOTIFICATION'
 }
 
 export const fetchCurrentUser = () => async dispatch => {
@@ -46,4 +47,11 @@ export const showLoader = flag => (dispatch, getState) => {
     })
   }
 
+}
+
+export const showNotification = (type, message, title = '', delay = 3000, callback = null) => {
+  return {
+    type: types.SHOW_NOTIFICATION,
+    payload: { type, title, message, delay, callback }
+  }
 }

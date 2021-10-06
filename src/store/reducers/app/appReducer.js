@@ -6,6 +6,13 @@ export const initialState = {
     name: '',
     data: {}
   },
+  notification: {
+    type: '',
+    title: '',
+    message: '',
+    delay: 0,
+    callback: null
+  },
   currentPage: descriptionOfPages.MAIN_PAGE.name,
   loaderCount: 0
 }
@@ -29,6 +36,11 @@ export function appReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         loaderCount: payload.count
+      }
+    case types.SHOW_NOTIFICATION:
+      return {
+        ...state,
+        notification: payload
       }
     default:
       return state
