@@ -9,11 +9,16 @@ export const types = {
 
 export const fetchCurrentUser = () => async dispatch => {
   try {
-    const data = await UsersApi.getCurrentUser()
+    dispatch(showLoader(true))
+    const data = await UsersApi.userCurrent()
     dispatch(setCurrentUserProps('name', `${data.answer.result.NAME}`))
     dispatch(setCurrentUserProps('data', data))
+    dispatch(showLoader(false))
   } catch (e) {
-    console.error('error', e)
+    console.error(e)
+    const { ex: { error: title, error_description: message } } = e
+    dispatch(showLoader(false))
+    dispatch(showNotification('error', message, title))
   }
 
 }

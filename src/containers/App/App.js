@@ -8,7 +8,12 @@ import {
   getVisibleLoaderFlag,
   getNotificationObj,
 } from '../../store/reducers/app/selectors'
-import { fetchCurrentUser, setCurrentPage } from '../../store/reducers/app/actions'
+import {
+  fetchCurrentUser,
+  setCurrentPage,
+  showNotification
+} from '../../store/reducers/app/actions'
+import { showLoader } from '../../store/reducers/app/actions'
 import MainPage from '../pages/MainPage'
 import CurrentRequestPage from '../pages/CurrentRequestPage'
 import NewRequestPage from '../pages/NewRequestPage'
@@ -31,7 +36,7 @@ const pages = {
 export default function App() {
   const { name } = useSelector(getCurrentUser)
   const currentPage = useSelector(getCurrentPage)
-  const showLoader = useSelector(getVisibleLoaderFlag)
+  const showLoaderFlag = useSelector(getVisibleLoaderFlag)
   const notyObj = useSelector(getNotificationObj)
   const dispatch = useDispatch()
 
@@ -44,34 +49,9 @@ export default function App() {
 
   return (
     <div className="app_wrap">
-      Hello , {name}!
-      <ul
-        style={{
-          margin: 0,
-          padding: "4px",
-          color: "tomato"
-        }}
-      >
-        {Object.keys(descriptionOfPages).map(item => {
-          return (
-            <li
-              style={{
-                display: "inline",
-                marginRight: "5px",
-                border: "1px solid #000",
-                padding: "3px",
-                cursor: "pointer"
-              }}
-              key={item}
-              onClick={() => dispatch(setCurrentPage(descriptionOfPages[item].name))}
-            >
-              {descriptionOfPages[item].title}
-            </li>
-          )
-        })}
-      </ul>
+      <h4>{`Пользователь ${name}`}</h4>
       <CurrentPageComponent />
-      {showLoader && <Loader />}
+      {showLoaderFlag && <Loader />}
       <Notification notyObj={notyObj} />
     </div>
   )

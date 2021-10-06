@@ -30,6 +30,6 @@ export default function Notification({ notyObj }) {
   }, [notyObj])
 
   return (
-    <NotificationContainer/>
+    <NotificationContainer />
   )
 }

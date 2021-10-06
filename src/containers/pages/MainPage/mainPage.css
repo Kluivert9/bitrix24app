@@ -1,0 +1,6 @@
+.main_page_wrap {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: start;
+    margin-left: -8px;
+}
