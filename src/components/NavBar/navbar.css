@@ -1,0 +1,6 @@
+.app_navbar {
+    border-radius: 8px;
+    right: 8px!important;
+    left: 8px!important;
+    width: calc(100% - 16px)!important;
+}

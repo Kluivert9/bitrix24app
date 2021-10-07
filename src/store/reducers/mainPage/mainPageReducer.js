@@ -17,6 +17,8 @@ export function mainPageReducer(state = initialState, { type, payload }) {
           [payload.propName]: payload.propValue
         }
       }
+    case types.CLEAR_MAIN_PAGE_STORE:
+      return payload
     default:
       return state
   }

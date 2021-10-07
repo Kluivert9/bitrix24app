@@ -8,12 +8,7 @@ import {
   getVisibleLoaderFlag,
   getNotificationObj,
 } from '../../store/reducers/app/selectors'
-import {
-  fetchCurrentUser,
-  setCurrentPage,
-  showNotification
-} from '../../store/reducers/app/actions'
-import { showLoader } from '../../store/reducers/app/actions'
+import { fetchCurrentUser } from '../../store/reducers/app/actions'
 import MainPage from '../pages/MainPage'
 import CurrentRequestPage from '../pages/CurrentRequestPage'
 import NewRequestPage from '../pages/NewRequestPage'
@@ -21,6 +16,7 @@ import SettingsPage from '../pages/SettingsPage'
 import TaskListPage from '../pages/TaskListPage'
 import Loader from '../../components/Loader'
 import Notification from '../../components/Notification'
+import NavBar from '../../components/NavBar'
 import { descriptionOfPages } from '../../common/descriptionOfPages'
 
 import './app.css'
@@ -49,7 +45,7 @@ export default function App() {
 
   return (
     <div className="app_wrap">
-      <h4>{`Пользователь ${name}`}</h4>
+      <NavBar name={name} page={currentPage}/>
       <CurrentPageComponent />
       {showLoaderFlag && <Loader />}
       <Notification notyObj={notyObj} />

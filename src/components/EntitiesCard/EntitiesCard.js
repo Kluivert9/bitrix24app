@@ -9,7 +9,7 @@ import Tooltip from '@mui/material/Tooltip'
 
 import './entitiesCard.css'
 
-export default function EntitiesCard({ entity }) {
+export default function EntitiesCard({ entity, taskListPageClick }) {
   const { NAME } = entity
 
   return (
@@ -26,13 +26,13 @@ export default function EntitiesCard({ entity }) {
           </Typography>
         </Tooltip>
         <Typography className="entities_card_action" >
-          <AddIcon className="entities_card_action_icon"/> Новая заявка
+          <AddIcon className="entities_card_action_icon" color="warning"/> Новая заявка
+        </Typography>
+        <Typography className="entities_card_action" onClick={() => taskListPageClick(entity)}>
+          <FormatListBulletedIcon className="entities_card_action_icon" color="success"/> Мои заявки
         </Typography>
         <Typography className="entities_card_action" >
-          <FormatListBulletedIcon className="entities_card_action_icon"/> Мои заявки
-        </Typography>
-        <Typography className="entities_card_action" >
-          <AlarmIcon className="entities_card_action_icon"/> Ждут моей реакции
+          <AlarmIcon className="entities_card_action_icon" color="error"/> Ждут моей реакции
         </Typography>
       </CardContent>
     </Card>

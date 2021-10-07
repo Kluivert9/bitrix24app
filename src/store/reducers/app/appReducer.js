@@ -14,7 +14,10 @@ export const initialState = {
     callback: null
   },
   currentPage: descriptionOfPages.MAIN_PAGE.name,
-  loaderCount: 0
+  loader: {
+    count: 0,
+    progress: '0%'
+  }
 }
 
 export function appReducer(state = initialState, { type, payload }) {
@@ -32,10 +35,13 @@ export function appReducer(state = initialState, { type, payload }) {
         ...state,
         currentPage: payload.page
       }
-    case types.SET_LOADER_COUNT:
+    case types.SET_LOADER_PROPS:
       return {
         ...state,
-        loaderCount: payload.count
+        loader: {
+          ...state.loader,
+          [payload.propName]: payload.propValue
+        }
       }
     case types.SHOW_NOTIFICATION:
       return {

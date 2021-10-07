@@ -3,7 +3,7 @@ import UsersApi from '../../../api/UsersApi'
 export const types = {
   SET_CURRENT_USER_PROPS: 'app/SET_CURRENT_USER_PROPS',
   SET_CURRENT_PAGE: 'app/SET_CURRENT_PAGE',
-  SET_LOADER_COUNT: 'app/SET_LOADER_COUNT',
+  SET_LOADER_PROPS: 'app/SET_LOADER_PROPS',
   SHOW_NOTIFICATION: 'app/SHOW_NOTIFICATION'
 }
 
@@ -38,20 +38,19 @@ export const setCurrentPage = page => {
 }
 
 export const showLoader = flag => (dispatch, getState) => {
-  let loaderCount = getState().appReducer.loaderCount
+  let { count } = getState().appReducer.loader
 
   if (flag) {
     dispatch({
-      type: types.SET_LOADER_COUNT,
-      payload: { count: ++loaderCount }
+      type: types.SET_LOADER_PROPS,
+      payload: { propName: 'count', propValue: ++count }
     })
   } else {
     dispatch({
-      type: types.SET_LOADER_COUNT,
-      payload: { count: --loaderCount }
+      type: types.SET_LOADER_PROPS,
+      payload: { propName: 'count', propValue: --count }
     })
   }
-
 }
 
 export const showNotification = (type, message, title = '', delay = 3000, callback = null) => {

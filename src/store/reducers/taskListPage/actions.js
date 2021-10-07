@@ -1,0 +1,49 @@
+import ListsApi from '../../../api/ListsApi'
+import { showLoader, showNotification } from '../app/actions'
+import { initialState } from './taskListPageReducer'
+
+export const types = {
+  SET_PARENT_ENTITY_DATA: 'taskListPage/SET_PARENT_ENTITY_DATA',
+  SET_LIST_ELEMENT: 'taskListPage/SET_LIST_ELEMENT',
+  CLEAR_TASK_LIST_PAGE_STORE: 'taskListPage/CLEAR_TASK_LIST_PAGE_STORE'
+}
+
+export const setParentEntityData = value => {
+  return {
+    type: types.SET_PARENT_ENTITY_DATA,
+    payload: value
+  }
+}
+
+export const fetchListElement = (id, userId) => async dispatch => {
+  try {
+    dispatch(showLoader(true))
+    const data = await ListsApi.listElementGet({
+      'IBLOCK_TYPE_ID': 'bitrix_processes',
+      'IBLOCK_ID': id,
+      /*'FILTER': {'CREATED_USER_ID': userId}*/
+    })
+    console.log('data', data)
+    dispatch(setListElement(data))
+    dispatch(showLoader(false))
+  } catch (e) {
+    console.error(e)
+    dispatch(showLoader(false))
+    const { ex: { error: title, error_description: message } } = e
+    dispatch(showNotification('error', message, title))
+  }
+}
+
+export const setListElement = list => {
+  return {
+    type: types.SET_LIST_ELEMENT,
+    payload: list
+  }
+}
+
+export const clearTaskListPageStore = () => {
+  return {
+    type: types.CLEAR_TASK_LIST_PAGE_STORE,
+    payload: initialState
+  }
+}
