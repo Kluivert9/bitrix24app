@@ -4,10 +4,10 @@ import Box from '@mui/material/Box'
 
 import './loader.css'
 
-export default function Loader() {
+export default function Loader({ progress = null }) {
   return (
     <Box className="loader_wrap">
-      <CircularProgress />
+      {progress ? progress : <CircularProgress />}
     </Box>
   )
 }

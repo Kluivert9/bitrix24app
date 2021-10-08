@@ -8,5 +8,6 @@
     z-index: 9999;
     justify-content: center;
     align-items: center;
-    background-color: rgba(107, 107, 107, .5);;
+    background-color: rgba(107, 107, 107, .5);
+    border-radius: 8px;
 }

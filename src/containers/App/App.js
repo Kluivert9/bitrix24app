@@ -7,6 +7,7 @@ import {
   getCurrentPage,
   getVisibleLoaderFlag,
   getNotificationObj,
+  getLoader
 } from '../../store/reducers/app/selectors'
 import { fetchCurrentUser } from '../../store/reducers/app/actions'
 import MainPage from '../pages/MainPage'
@@ -33,6 +34,7 @@ export default function App() {
   const { name } = useSelector(getCurrentUser)
   const currentPage = useSelector(getCurrentPage)
   const showLoaderFlag = useSelector(getVisibleLoaderFlag)
+  const { progress } = useSelector(getLoader)
   const notyObj = useSelector(getNotificationObj)
   const dispatch = useDispatch()
 
@@ -48,6 +50,7 @@ export default function App() {
       <NavBar name={name} page={currentPage}/>
       <CurrentPageComponent />
       {showLoaderFlag && <Loader />}
+      {progress !== '0%' && <Loader progress={progress}/>}
       <Notification notyObj={notyObj} />
     </div>
   )

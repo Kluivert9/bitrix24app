@@ -17,6 +17,8 @@ export default function TaskListPage() {
     return () => dispatch(clearTaskListPageStore())
   }, [])
 
+  useEffect(() => console.log('elementList', elementList), [elementList])
+
   return (
     <p>TaskListPage</p>
   )

@@ -53,6 +53,13 @@ export const showLoader = flag => (dispatch, getState) => {
   }
 }
 
+export const setLoaderProgress = progress => {
+  return {
+    type: types.SET_LOADER_PROPS,
+    payload: { propName: 'progress' ,propValue: `${progress}%` }
+  }
+}
+
 export const showNotification = (type, message, title = '', delay = 3000, callback = null) => {
   return {
     type: types.SHOW_NOTIFICATION,
