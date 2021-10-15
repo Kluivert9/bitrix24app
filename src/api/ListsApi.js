@@ -7,12 +7,16 @@ class ListsApi extends ApiClient {
     return this.call(LISTS_METHODS.LISTS_GET, options, callback)
   }
 
-  listElementGet(options = {}, setProgress) {
+  listElementGetAll(options = {}, setProgress) {
     BX24Wrapper.batchSize = 50
     BX24Wrapper.throttle = 100
     BX24Wrapper.progress = setProgress
 
     return BX24Wrapper.callListMethod(LISTS_METHODS.LIST_ELEMENT_GET, options)
+  }
+
+  async listElementGet(options = {}, callback = null) {
+    return this.callWithStart(LISTS_METHODS.LIST_ELEMENT_GET, options, callback)
   }
 }
 

@@ -11,7 +11,7 @@ export const fetchLists = () => async dispatch => {
   try {
     dispatch(showLoader(true))
     const data = await ListsApi.listsGet({'IBLOCK_TYPE_ID': 'bitrix_processes'})
-    dispatch(setLists('listsEntities', data.answer.result))
+    dispatch(setLists('listsEntities', data))
     dispatch(showLoader(false))
   } catch (e) {
     console.error(e)

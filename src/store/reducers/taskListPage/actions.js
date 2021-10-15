@@ -1,5 +1,5 @@
 import ListsApi from '../../../api/ListsApi'
-import { showNotification, setLoaderProgress } from '../app/actions'
+import { showNotification, setLoaderProgress, showLoader } from '../app/actions'
 import { initialState } from './taskListPageReducer'
 
 export const types = {
@@ -17,15 +17,17 @@ export const setParentEntityData = value => {
 
 export const fetchListElement = (id, userId) => async dispatch => {
   try {
+    dispatch(showLoader(true))
     const data = await ListsApi.listElementGet({
-      'IBLOCK_TYPE_ID': 'bitrix_processes',
-      'IBLOCK_ID': id,
-      /*'FILTER': {'CREATED_USER_ID': userId}*/
-    }, progress => dispatch(setLoaderProgress(progress)))
-
-    dispatch(setLoaderProgress(0))
+      IBLOCK_TYPE_ID: 'bitrix_processes',
+      IBLOCK_ID: id,
+      /*FILTER: { CREATED_USER_ID : userId},*/
+      start: 0
+    })
+    dispatch(showLoader(false))
     dispatch(setListElement(data))
   } catch (e) {
+    dispatch(showLoader(false))
     console.error(e)
     dispatch(setLoaderProgress(0))
     const { ex: { error: title, error_description: message } } = e

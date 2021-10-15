@@ -11,7 +11,7 @@ export const fetchCurrentUser = () => async dispatch => {
   try {
     dispatch(showLoader(true))
     const data = await UsersApi.userCurrent()
-    dispatch(setCurrentUserProps('name', `${data.answer.result.NAME}`))
+    dispatch(setCurrentUserProps('name', `${data.NAME}`))
     dispatch(setCurrentUserProps('data', data))
     dispatch(showLoader(false))
   } catch (e) {

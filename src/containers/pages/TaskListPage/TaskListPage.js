@@ -8,7 +8,7 @@ import { getCurrentUser } from '../../../store/reducers/app/selectors'
 export default function TaskListPage() {
   const dispatch = useDispatch()
   const { ID: id } = useSelector(getParentEntityData)
-  const { data: { answer: { result: { ID: userId } } } } = useSelector(getCurrentUser)
+  const { data: { ID: userId } } = useSelector(getCurrentUser)
   const elementList = useSelector(getElementList)
 
   useEffect(() => {
